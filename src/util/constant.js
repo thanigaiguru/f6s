@@ -2,14 +2,14 @@ const bob = {
     id: 23,
     firstName: 'Bob',
     lastName: 'Greatlance',
-    thumbnail: 'https://images.generated.photos/c_mH5kvsgrsGhrN5GhQIIRdIIvoHP6G2ujkTs4c8XFM/rs:fit:512:512/Z3M6Ly9nZW5lcmF0/ZWQtcGhvdG9zL3Yz/XzAxMTk5OTguanBn.jpg',
+    thumbnail: 'https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250',
 };
 
 const jack = {
     id: 48,
-    fistName: 'Jack',
+    firstName: 'Jack',
     lastName: 'Dowager',
-    thumbnail: 'https://images.generated.photos/g232OgTeDpORCR483-Ko3acnrLoePZIbyMDabR64x2U/rs:fit:512:512/Z3M6Ly9nZW5lcmF0/ZWQtcGhvdG9zL3Yz/XzA3MDgyODAuanBn.jpg',
+    thumbnail: 'https://placebear.com/250/250',
 };
 
 const messages = [

@@ -3,7 +3,7 @@
       <textarea
         v-model="messageText"
         @input="adjustTextareaHeight"
-        @keyup.enter="submitMessage"
+        @keyup.enter="(e) => checkShitEnterAndSubmitMsg(e)"
         ref="messageInput"
         rows="1"
         placeholder="Enter your message."
@@ -23,24 +23,39 @@ export default {
     },
     data() {
         return {
-            messageText: this.value || ''
+            messageText: this.value || '',
+            maxRows: 3
         }
     },
     methods: {
         
         // To increase the text Area height when we typing
         adjustTextareaHeight() {
-            const textarea = this.$refs.messageInput;
-            textarea.style.height = 'auto';
-            textarea.style.height = textarea.scrollHeight + 'px';
+            let textarea = this.$refs.messageInput;
+            let lines = this.messageText.split('\n').length;
+
+            if (lines > this.maxRows) {
+                textarea.rows = this.maxRows;
+            } else {
+                textarea.rows = lines;
+            }
+        },
+
+        checkShitEnterAndSubmitMsg(e) {
+            if(e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                this.submitMessage();
+                return;
+            }
         },
 
         // Handler to emit submit event
         submitMessage() {
-            if (this.messageText.trim() === '') {
+            let message = this.messageText.trim();
+            if ( message === '') {
                 return;
             }
-            this.$emit('submit', this.messageText);
+            this.$emit('submit', message);
             this.messageText = '';
             this.adjustTextareaHeight();
         }
@@ -61,7 +76,6 @@ export default {
         border: 1px solid #ccc;
         border-radius: 4px;
         resize: vertical;
-        overflow: hidden;
     }
     
     button {

@@ -13,7 +13,7 @@
 
 import ComposeSection from "../../components/ComposeSection.vue";
 import ConversationArea from "../../components/ConversationArea.vue";
-import { mapState  } from 'vuex';
+import { mapState } from 'vuex';
 
 export default {
     name : 'Chat',
@@ -35,11 +35,11 @@ export default {
     methods: {
 
         sendReply(message) {
+            message = message.replace(/\n/g, '<br>');
             // Logic for adding msg to bottom of the compose section
-            this.$store.dispatch('chatstore/addMessage', message);
-
+            this.$store.dispatch('chatstore/addMessage', message)
             // Compose section shoulde be cleared
-            this.message = "";
+                .finally(() => this.message = "");
         }
     }
 }
