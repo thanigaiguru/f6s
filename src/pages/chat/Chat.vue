@@ -2,8 +2,8 @@
     <div>
         <div>Chat Section</div>
         <conversation-area
-            :messages="messages"
-            :currentUser="currentUserObj"
+            :messages="conversation"
+            :currentUser="me"
         ></conversation-area>
         <compose-section v-model="message" @submit="sendReply" />
     </div>
@@ -13,10 +13,7 @@
 
 import ComposeSection from "../../components/ComposeSection.vue";
 import ConversationArea from "../../components/ConversationArea.vue";
-import { currentUser, conversation } from "../../util/constant.js";
-
-let currentUserObj = JSON.parse(currentUser);
-let conversationArr = JSON.parse(conversation);
+import { mapState, mapActions  } from 'vuex';
 
 export default {
     name : 'Chat',
@@ -26,18 +23,21 @@ export default {
     },
     data(){
         return {
-            message: "Default msg for testing purpose",
-            messages: conversationArr,
-            currentUserObj: currentUserObj
+            message: ""
         }
     },
+    beforeCreate() {
+        this.fetchConversation();
+    },
     computed: {
-
+        ...mapState('chatstore',['me','conversation'])
     },
     methods: {
+        ...mapActions('chatstore',['fetchConversation','addMessage']),
+
         sendReply(message) {
             // Logic for adding msg to bottom of the compose section
-            
+            this.addMessage(message);
 
             // Compose section shoulde be cleared
             this.message = "";

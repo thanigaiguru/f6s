@@ -1,8 +1,22 @@
-import axios from 'axios';
+import { conversation } from "../../util/constant.js";
+let conversationArr = JSON.parse(conversation);
 
-const URL = window.location.origin;
-
-
-export default {
+let chatAction = (() => {
+    return {
+        fetchConversation({ commit }) {
+            commit('setConversation', conversationArr);
+        },
     
-}
+        addMessage({ commit }, message) {
+            const newMessage = {
+                id: state.conversation.length + 1,
+                from: state.me,
+                message,
+                date: new Date().toISOString()
+            };
+            commit('addMessage', newMessage);
+        }
+    }
+})();
+
+export default chatAction;
