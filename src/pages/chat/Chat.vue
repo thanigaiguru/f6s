@@ -13,7 +13,7 @@
 
 import ComposeSection from "../../components/ComposeSection.vue";
 import ConversationArea from "../../components/ConversationArea.vue";
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 export default {
     name : 'Chat',
@@ -26,13 +26,16 @@ export default {
             message: ""
         }
     },
-    beforeCreate() {
-        this.$store.dispatch('chatstore/fetchConversation');
+    beforeMount() {
+        this.fetchConversation();
     },
     computed: {
         ...mapState('chatstore',['me','conversation'])
     },
     methods: {
+        ...mapActions({
+            fetchConversation: 'chatstore/fetchConversation'
+        }),
 
         sendReply(message) {
             message = message.replace(/\n/g, '<br>');
