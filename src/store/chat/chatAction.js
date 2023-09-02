@@ -7,7 +7,7 @@ let chatAction = (() => {
             commit('setConversation', conversationArr);
         },
     
-        addMessage({ commit }, message) {
+        addMessage({ commit, state }, message) {
             const newMessage = {
                 id: state.conversation.length + 1,
                 from: state.me,
