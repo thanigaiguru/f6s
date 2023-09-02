@@ -5,6 +5,7 @@
         @input="adjustTextareaHeight"
         @keyup.enter="submitMessage"
         ref="messageInput"
+        rows="1"
         placeholder="Enter your message."
       ></textarea>
       <button @click="submitMessage">Send</button>
@@ -20,7 +21,7 @@ export default {
             default: ''
         }
     },
-    data(){
+    data() {
         return {
             messageText: this.value || ''
         }
@@ -36,7 +37,9 @@ export default {
 
         // Handler to emit submit event
         submitMessage() {
-            if (this.messageText.trim() === '') return;
+            if (this.messageText.trim() === '') {
+                return;
+            }
             this.$emit('submit', this.messageText);
             this.messageText = '';
             this.adjustTextareaHeight();

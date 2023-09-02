@@ -1,6 +1,10 @@
 <template>
     <div>
         <div>Chat Section</div>
+        <conversation-area
+            :messages="messages"
+            :currentUser="currentUserObj"
+        ></conversation-area>
         <compose-section v-model="message" @submit="sendReply" />
     </div>
 </template>
@@ -8,17 +12,23 @@
 <script>
 
 import ComposeSection from "../../components/ComposeSection.vue";
+import ConversationArea from "../../components/ConversationArea.vue";
+import { currentUser, conversation } from "../../util/constant.js";
+
+let currentUserObj = JSON.parse(currentUser);
+let conversationArr = JSON.parse(conversation);
 
 export default {
     name : 'Chat',
     components: {
+        ConversationArea,
         ComposeSection
     },
     data(){
         return {
             message: "Default msg for testing purpose",
-            messageList: "",
-           
+            messages: conversationArr,
+            currentUserObj: currentUserObj
         }
     },
     computed: {
@@ -27,9 +37,6 @@ export default {
     methods: {
         sendReply(message) {
             // Logic for adding msg to bottom of the compose section
-
-
-            // Scroll the conversation area to the bottom, if not already there
             
 
             // Compose section shoulde be cleared
