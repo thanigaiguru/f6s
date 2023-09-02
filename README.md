@@ -14,7 +14,7 @@ npm install
 ### Compiles and hot-reloads for development
 ```
 npm run serve
-then go to the link ` http://localhost:8080`
+go to the link ` https://localhost:8080`
 ```
 
 
